@@ -22,6 +22,9 @@ public class TestResource {
     @Autowired
     Environment env;
 
+    @Value("${server.port}")
+    private Integer port;
+
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> testGet(@RequestParam(value = "version", required = false) String version) {
@@ -33,7 +36,8 @@ public class TestResource {
         return ImmutableMap.of("test", "success.",
                 "version", StringUtils.defaultIfEmpty(version, ""),
                 "serverPort", env.getProperty("server.port"),
-                "usedTime", String.valueOf(System.currentTimeMillis() - start));
+                "usedTime", String.valueOf(System.currentTimeMillis() - start),
+                "port", String.valueOf(port));
     }
 
 

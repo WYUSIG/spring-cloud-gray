@@ -6,7 +6,7 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 server:
-  port: 20103
+  port: 20105
 eureka:
   client:
     register-with-eureka: true
@@ -67,7 +67,7 @@ gray:
         exclude-path-patterns: /test/*
 #  client:
 #    instance:
-#      grayEnroll: false #是否在启动后自动注册成灰度实例
+#      grayEnroll: true #是否在启动后自动注册成灰度实例
 logging:
   level:
     cn:

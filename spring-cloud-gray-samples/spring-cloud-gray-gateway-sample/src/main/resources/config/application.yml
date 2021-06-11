@@ -16,25 +16,26 @@ spring:
         locator:
           enabled: true
           lowerCaseServiceId: true
-      routes:
-        # service-a
-        - id: service-a
-          uri: lb://service-a
-          predicates:
-            - Path=/ser-a/**
-          filters:
-            - StripPrefix=1
-            # 限流配置
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@uriKeyResolver}'
-                redis-rate-limiter.replenishRate: 500
-                redis-rate-limiter.burstCapacity: 1000
-            # 降级配置
-            - name: Hystrix
-              args:
-                name: default
-                fallbackUri: 'forward:/fallback'
+          url-expression: "'lb://' + serviceId"
+#      routes:
+#        # service-a
+#        - id: service-a
+#          uri: lb://service-a
+#          predicates:
+#            - Path=/ser-a/**
+#          filters:
+#            - StripPrefix=1
+#            # 限流配置
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: '#{@uriKeyResolver}'
+#                redis-rate-limiter.replenishRate: 500
+#                redis-rate-limiter.burstCapacity: 1000
+#            # 降级配置
+#            - name: Hystrix
+#              args:
+#                name: default
+#                fallbackUri: 'forward:/fallback'
     stream:
       bindings:
         GrayEventInput:
@@ -97,13 +98,13 @@ gray:
       definitionsInitializeDelayTimeInMs: 10000
       web:
         track-definitions:
-        #          - name: HttpIP
-        #          - name: HttpMethod
-        #          - name: HttpURI
-        #          - name: HttpReceive
-        #          - name: HttpHeader
-        #          - name: HttpParameter
-        #            value: version,test
+        - name: HttpIP
+        - name: HttpMethod
+        - name: HttpURI
+        - name: HttpReceive
+        - name: HttpHeader
+        - name: HttpParameter
+          value: version,test
         path-patterns: /*
   load:
     enabled: false

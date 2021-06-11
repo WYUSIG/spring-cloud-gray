@@ -9,9 +9,9 @@ spring:
   #通用数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gray_server?charset=utf8mb4&useSSL=false
+    url: jdbc:mysql://132.232.20.151:3306/gray_server?charset=utf8mb4&useSSL=false
     username: root
-    password: root
+    password: yzh3112003074
     # Hikari 数据源专用配置
     hikari:
       maximum-pool-size: 20
